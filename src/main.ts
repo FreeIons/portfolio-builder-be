@@ -15,14 +15,14 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
   const config = new DocumentBuilder()
-    .setTitle('ICC Nexton')
-    .setDescription('ICC Nexton Microservice ')
+    .setTitle('Portfolio Resume Builder')
+    .setDescription('Microservice to convert Resume into protfolio ')
     .setVersion('v1')
-    .addTag('nexton')
+    .addTag('resfolio')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('nexton/api', app, document);
+  SwaggerModule.setup('resfolio/api', app, document);
   app.use(helmet());
   app.enableCors();
   app.useGlobalFilters(new GlobalExceptionFilter());
