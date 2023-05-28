@@ -20,7 +20,7 @@ export interface MongoDb {
 export const Configs = (): Config => {
   return {
     env: process.env.ENV || 'dev',
-    context: process.env.CONTEXT || 'nexton',
+    context: process.env.CONTEXT || 'resfolio',
     port: parseInt(process.env.APP_PORT) || parseInt('3000'),
     databases: {
       mongo_db: {
