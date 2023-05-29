@@ -24,7 +24,6 @@ const custom_errors_1 = require("../errors/custom.errors");
 const login_user_dto_1 = require("./dto/login-user.dto");
 const current_user_decorator_1 = require("../current-user/current-user.decorator");
 const update_user_password_dto_1 = require("./dto/update-user-password.dto");
-const user_dto_1 = require("../current-user/dto/user.dto");
 const update_platform_user_password_1 = require("./dto/update-platform-user-password");
 let AuthController = AuthController_1 = class AuthController {
     constructor(AuthService) {
@@ -73,12 +72,6 @@ let AuthController = AuthController_1 = class AuthController {
     }
     async getUser(platform_user) {
         return this.AuthService.getUser(platform_user);
-    }
-    async getUserByClientId(user, param) {
-        if (user.client_id !== param.clientId) {
-            throw (0, custom_errors_1.HttpError)(common_1.HttpStatus.UNAUTHORIZED, `token is not valid for ${param.clientId}`);
-        }
-        return await this.AuthService.getUserByClientId(user.client_id);
     }
     async deleteUser(param) {
         return await this.AuthService.deleteUser(param.id);
@@ -205,28 +198,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "getUser", null);
-__decorate([
-    (0, common_1.Get)('/client/:clientId'),
-    (0, role_decorators_1.Roles)(role_guard_1.Role.PLATFORM_USER),
-    (0, swagger_1.ApiOperation)({
-        summary: 'Get User',
-        description: 'Get User Description',
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: common_1.HttpStatus.OK,
-        description: 'The User successfully found',
-    }),
-    (0, swagger_1.ApiResponse)({ status: common_1.HttpStatus.FORBIDDEN, description: 'Forbidden.' }),
-    (0, swagger_1.ApiResponse)({
-        status: common_1.HttpStatus.PRECONDITION_FAILED,
-        description: 'Failed Precondition.',
-    }),
-    __param(0, (0, current_user_decorator_1.CurrentUser)()),
-    __param(1, (0, common_1.Param)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_dto_1.CurrentUserDto, Object]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "getUserByClientId", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
     (0, role_decorators_1.Roles)(role_guard_1.Role.ADMIN),

@@ -152,27 +152,6 @@ export class AuthService {
         return user;
     }
 
-    async getUserByClientId(client_id: string): Promise<LoginUserResponse> {
-        let user;
-        try {
-            user = await this.authRepository.userModel
-                .findOne({
-                    client_id,
-                    is_active: true
-                }).
-                populate('client_id').exec();
-        } catch (error) {
-            this.logger.error(
-                `Error occurred while getting Client by Id ${this.getUserByClientId.name}:${error.message}`,
-            );
-            throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'something went wrong');
-        }
-
-        if (!user) {
-            throw HttpError(HttpStatus.NOT_FOUND, 'Credentials are not valid.');
-        }
-        return user;
-    }
 
     async deleteUser(id: string) {
         let user;
