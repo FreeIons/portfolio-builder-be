@@ -188,33 +188,7 @@ import {
       return this.AuthService.getUser(platform_user);
     }
   
-    @Get('/client/:clientId')
-    @Roles(Role.PLATFORM_USER)
-    @ApiOperation({
-      summary: 'Get User',
-      description: 'Get User Description',
-    })
-    @ApiResponse({
-      status: HttpStatus.OK,
-      description: 'The User successfully found',
-    })
-    @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
-    @ApiResponse({
-      status: HttpStatus.PRECONDITION_FAILED,
-      description: 'Failed Precondition.',
-    })
-    async getUserByClientId(
-      @CurrentUser() user: CurrentUserDto,
-      @Param() param: { clientId: string },
-    ): Promise<LoginUserResponse> {
-      // console.log(user);
-      if (user.client_id !== param.clientId) {
-        throw HttpError(HttpStatus.UNAUTHORIZED, `token is not valid for ${param.clientId}`);
-      }
-  
-      return await this.AuthService.getUserByClientId(user.client_id);
-    }
-  
+     
     @Delete('/:id')
     @Roles(Role.ADMIN)
     @ApiOperation({
