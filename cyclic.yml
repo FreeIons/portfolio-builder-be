@@ -1,0 +1,18 @@
+# .cyclic.yml
+
+jobs:
+  - name: deploy
+    image: node:14
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - run:
+          name: Build application
+          command: npm run build
+
+      - run:
+          name: Start application
+          command: npm start:prod
