@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { ConfigModule } from '@nestjs/config';
 import { Configs } from 'src/config/config';
 
